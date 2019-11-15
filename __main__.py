@@ -6,8 +6,8 @@ import subprocess
 
 class Ui(QtWidgets.QMainWindow):
     def __init__(self):
-        super(Ui, self).__init__()  # Call the inherited classes __init__ method
-        uic.loadUi('MainWindow.ui', self)  # Load the .ui file
+        super(Ui, self).__init__()
+        uic.loadUi('MainWindow.ui', self)
 
         self.lvFiles = self.findChild(QtWidgets.QListView, 'lvFiles')
         self.teManOutput = self.findChild(QtWidgets.QTextEdit, 'teManOutput')
@@ -27,11 +27,10 @@ class Ui(QtWidgets.QMainWindow):
             for filename in files:
                 self.model.appendRow(QtGui.QStandardItem(filename))
             break
-        self.show()  # Show the GUI
+        self.show()
 
     def menuSelectFolderClicked(self):
-        print("test")
-        self.current_folder = QtWidgets.QFileDialog.getExistingDirectory()
+        self.current_folder = QtWidgets.QFileDialog.getExistingDirectory(self, "Open A Folder", "/")
         self.model.clear()
         for root, dirs, files in os.walk(self.current_folder):
             for filename in files:
@@ -43,7 +42,7 @@ class Ui(QtWidgets.QMainWindow):
         print(self.selectedListItem.text())
         try:
             os.remove("last_output.txt")
-        except:
+        except FileNotFoundError:
             print("File Not Found!")
         proc = subprocess.Popen('man ' + self.selectedListItem.text() + " >> last_output.txt", shell=True)
         proc.wait()
@@ -59,6 +58,6 @@ class Ui(QtWidgets.QMainWindow):
             self.teManOutput.verticalScrollBar().setValue(0)
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)  # Create an instance of QtWidgets.QApplication
-    window = Ui()  # Create an instance of our class
-    app.exec_()  # Start the application
+    app = QtWidgets.QApplication(sys.argv)
+    window = Ui()
+    app.exec_()
