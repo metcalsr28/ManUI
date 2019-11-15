@@ -44,12 +44,6 @@
      <height>25</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuSelectFolder">
-    <property name="title">
-     <string>Select Folder</string>
-    </property>
-   </widget>
-   <addaction name="menuSelectFolder"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

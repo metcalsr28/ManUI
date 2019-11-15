@@ -11,10 +11,10 @@ class Ui(QtWidgets.QMainWindow):
 
         self.lvFiles = self.findChild(QtWidgets.QListView, 'lvFiles')
         self.teManOutput = self.findChild(QtWidgets.QTextEdit, 'teManOutput')
-        self.menuSelectFolder = self.findChild(QtWidgets.QMenu, 'menuSelectFolder')
-        self.menu_action = QtWidgets.QAction('Option #1', self)
+        self.menubar = self.findChild(QtWidgets.QMenuBar, 'menubar')
+        self.menu_action = QtWidgets.QAction('Select Folder', self)
         self.menu_action.triggered.connect(self.menuSelectFolderClicked)
-        self.menuSelectFolder.addAction(self.menu_action)
+        self.menubar.addAction(self.menu_action)
         self.current_folder = "/"
 
         self.model = QtGui.QStandardItemModel()
